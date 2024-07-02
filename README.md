@@ -1,16 +1,15 @@
-# weatherapp
+# Weather
 
-A new Flutter project.
+Simple weather app made with Flutter.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+### Home screen:
+Search bar where users can enter a city name
+Button to trigger the weather search
+Loading indicator while fetching data
+### Weather details screen: 
+City name, Current temperature (in Celsius), Weather condition, An icon representing the weather condition, Humidity percentage, Wind speed
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
