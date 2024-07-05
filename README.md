@@ -20,5 +20,5 @@ City name, Current temperature (in Celsius), Weather condition, An icon represen
 4) http for network calls
 5) Provider for state management
 
-<img src="https://github.com/Shellinox/weather_app/assets/114509764/8a10ab00-a7ed-4842-8ffb-09152cf120d9"  width="1080/4" height="2400/4">
+<img src="https://github.com/Shellinox/weather_app/assets/114509764/8a10ab00-a7ed-4842-8ffb-09152cf120d9"  width="60%" height="60%">
 <!-- ![Screenshot_1719925558](https://github.com/Shellinox/weather_app/assets/114509764/8a10ab00-a7ed-4842-8ffb-09152cf120d9) -->
