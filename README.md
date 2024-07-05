@@ -12,7 +12,8 @@ Button to trigger the weather search <br>
 Loading indicator while fetching data <br>
 ### Weather details screen: 
 City name, Current temperature (in Celsius), Weather condition, An icon representing the weather condition, Humidity percentage, Wind speed
-
+### Error Screen
+Custom user friendly error messages with appropriate actions
 ### Packages or technology used:
 1) Shared Preferences for saving last searched weather details
 2) Flutter for UI
