@@ -12,12 +12,12 @@ class AdditionalDetailsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    // Resusable details tile
     return SizedBox(
-      height: 140,
-      width: 120,
+      width: width / 3.3,
       child: Card(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(9)),
           elevation: 0,
           color: Colors.blue.withOpacity(0.15),
           child: Column(
@@ -25,8 +25,10 @@ class AdditionalDetailsTile extends StatelessWidget {
             children: [
               Text(
                 propertyTitle,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.black54),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54,
+                    fontSize: MediaQuery.of(context).size.width / 45),
               ),
               Image.asset(
                 propertyIcon,
@@ -34,7 +36,9 @@ class AdditionalDetailsTile extends StatelessWidget {
               ),
               Text(
                 propertyValue,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: MediaQuery.of(context).size.width / 50),
               ),
             ],
           )),

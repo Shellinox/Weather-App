@@ -1,49 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:weatherapp/constants.dart';
 import 'package:weatherapp/network/api_calls.dart';
-import 'package:weatherapp/network/provider/weather_provider.dart';
 import 'package:weatherapp/reusable/additional_details_tile.dart';
+import 'package:weatherapp/screens/error_screen.dart';
 import 'package:weatherapp/screens/home_screen.dart';
 
-class WeatherDetailsScreen extends StatefulWidget {
-  final String city;
-  const WeatherDetailsScreen({super.key, required this.city});
+class TabletScreen extends StatefulWidget {
+  const TabletScreen({super.key});
 
   @override
-  State<WeatherDetailsScreen> createState() => _WeatherDetailsScreenState();
+  State<TabletScreen> createState() => _TabletScreenState();
 }
 
-class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
+class _TabletScreenState extends State<TabletScreen> {
   @override
   Widget build(BuildContext context) {
-    String city = Provider.of<WeatherProvider>(context).cityName;
     return Scaffold(
       appBar: AppBar(
         title: Text(
           "Weather",
-          style: GoogleFonts.poppins(fontWeight: FontWeight.w500,fontSize: 16),
+          style: GoogleFonts.poppins(fontWeight: FontWeight.w500, fontSize: 16),
         ),
         centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {
               setState(() {
-                getCurrentWeather(city);
+                getCurrentWeather();
               });
             },
-            icon: const Icon(Icons.refresh,color: Colors.black,),
+            icon: const Icon(
+              Icons.refresh,
+              color: Colors.black,
+            ),
           ),
         ],
       ),
       body: FutureBuilder(
-        future: getCurrentWeather(city),
+        future: getCurrentWeather(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator(color: Colors.blue,));
+            return const Center(
+                child: CircularProgressIndicator(
+              color: Colors.blue,
+            ));
           } else if (snapshot.hasError) {
-            return Text(snapshot.error.toString());
+            return Center(
+              child: ErrorScreen(
+                errorCode: snapshot.error.toString(),
+              ),
+            );
           }
           final data = snapshot.data!;
           final String city = data['name'];
@@ -93,53 +100,67 @@ class _WeatherDetailsScreenState extends State<WeatherDetailsScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Image.asset(
-                  weatherIcons[weatherType]!,
-                  scale: 3,
-                ),
-                Text(
-                  "${temperature.toString()}°C",
-                  style: GoogleFonts.manrope(
-                      fontSize: 100, fontWeight: FontWeight.w900),
-                ),
-                Text(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(children: [
+                      Image.asset(
+                      weatherIcons[weatherType]!,
+                      scale: 2,
+                    ),
+                    Text(
                   weatherType.toString().toUpperCase(),
                   style: const TextStyle(
-                      fontSize: 30,
+                      fontSize: 24,
                       fontWeight: FontWeight.w800,
                       color: Colors.black54),
                 ),
-                const SizedBox(
-                  height: 40,
-                ),
-                const Text(
-                  "Additional Information",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ],),
+                    Text(
+                      "${temperature.toString()}°C",
+                      style: GoogleFonts.manrope(
+                          fontSize: 200, fontWeight: FontWeight.w900),
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                Row(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    AdditionalDetailsTile(
-                      propertyTitle: 'Humidity',
-                      propertyIcon: additionalWeatherIcons["Humidity"]!,
-                      propertyValue: humidityPercentage.toString(),
+                    const Text(
+                      "Additional Information",
+                      textAlign: TextAlign.left,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    AdditionalDetailsTile(
-                      propertyTitle: 'Pressure',
-                      propertyIcon: additionalWeatherIcons["Pressure"]!,
-                      propertyValue: pressure.toString(),
+                    const SizedBox(
+                      height: 20,
                     ),
-                    AdditionalDetailsTile(
-                      propertyTitle: 'Wind',
-                      propertyIcon: additionalWeatherIcons["Wind"]!,
-                      propertyValue: windSpeed.toString(),
-                    ),
+                    ConstrainedBox(
+                      constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.width/6),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          AdditionalDetailsTile(
+                            propertyTitle: 'Humidity',
+                            propertyIcon: additionalWeatherIcons["Humidity"]!,
+                            propertyValue: humidityPercentage.toString(),
+                          ),
+                          AdditionalDetailsTile(
+                            propertyTitle: 'Pressure',
+                            propertyIcon: additionalWeatherIcons["Pressure"]!,
+                            propertyValue: pressure.toString(),
+                          ),
+                          AdditionalDetailsTile(
+                            propertyTitle: 'Wind',
+                            propertyIcon: additionalWeatherIcons["Wind"]!,
+                            propertyValue: windSpeed.toString(),
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 )
               ],

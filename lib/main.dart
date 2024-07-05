@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:weatherapp/network/provider/weather_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weatherapp/provider/weather_provider.dart';
 import 'package:weatherapp/screens/home_screen.dart';
+import 'package:weatherapp/responsive/responsive_screen.dart';
+import 'package:weatherapp/screens/weather_details_screen_mobile.dart';
 
-void main() {
+String storedValue = '';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   Provider.debugCheckInvalidValueType = null;
+  final prefs = await SharedPreferences.getInstance();
+  storedValue = prefs.getString('city') ?? '';
   runApp(
     MultiProvider(
       providers: [
@@ -18,8 +25,18 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +49,9 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: storedValue == ''
+          ? const HomeScreen() 
+          : const ResponsiveScreen(), // Show details screen if stored value is not empty (For data persistance)
     );
   }
 }

@@ -11,3 +11,9 @@ Map<String, String> additionalWeatherIcons = {
   "Humidity": "assets/images/humidity.png",
   "Wind": "assets/images/wind.png"
 };
+
+Map<String, String> errorCodes = {
+  "404": "City not found, Please enter the name of the city correctly.",
+  "400": "Some unexpected error occured.",
+  "401": "Can't get the weather data now, Please try again later."
+};
