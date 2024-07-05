@@ -22,4 +22,4 @@ City name, Current temperature (in Celsius), Weather condition, An icon represen
 
 ## UI Screenshots:
 <img src="https://github.com/Shellinox/weather_app/assets/114509764/8a10ab00-a7ed-4842-8ffb-09152cf120d9"  width="30%" height="30%">
-<img src="https://github.com/Shellinox/weather_app/assets/114509764/45c1ee87-3d8a-45a9-b340-7b49247e768a"  width="60%" height="60%">
+<img src="https://github.com/Shellinox/weather_app/assets/114509764/45c1ee87-3d8a-45a9-b340-7b49247e768a"  width="100%" height="100%">
